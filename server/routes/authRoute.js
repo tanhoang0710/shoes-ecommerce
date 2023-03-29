@@ -3,6 +3,7 @@ const {
   registerController,
   loginController,
   testController,
+  forgotPasswordController,
 } = require("../controllers/authController");
 const { requireSignIn, isAdmin } = require("../middlewares/authMiddleware");
 
@@ -15,6 +16,9 @@ router.post("/register", registerController);
 
 // Login || Method POST
 router.post("/login", loginController);
+
+// Forgot password || POST
+router.post("/forgot-password", forgotPasswordController);
 
 //test routes
 router.get("/test", requireSignIn, isAdmin, testController);
