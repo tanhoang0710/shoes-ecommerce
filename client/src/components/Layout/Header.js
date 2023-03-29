@@ -1,8 +1,21 @@
 import React from "react";
+import { toast } from "react-hot-toast";
 import { NavLink, Link } from "react-router-dom";
-import { GiShoppingBag } from "react-icons/gi";
+import { useAuth } from "../../context/auth";
 
 const Header = () => {
+  const [auth, setAuth] = useAuth();
+
+  const handleLogout = () => {
+    setAuth({
+      ...auth,
+      user: null,
+      token: "",
+    });
+    localStorage.removeItem("auth");
+    toast.success("Đăng xuất thành công!");
+  };
+
   return (
     <>
       <nav className="navbar navbar-expand-lg bg-body-tertiary">
@@ -33,16 +46,31 @@ const Header = () => {
                   Danh mục
                 </NavLink>
               </li>
-              <li className="nav-item">
-                <NavLink to="/register" className="nav-link">
-                  Đăng kí
-                </NavLink>
-              </li>
-              <li className="nav-item">
-                <NavLink to="/login" className="nav-link">
-                  Đăng nhập
-                </NavLink>
-              </li>
+              {!auth.user ? (
+                <>
+                  <li className="nav-item">
+                    <NavLink to="/register" className="nav-link">
+                      Đăng kí
+                    </NavLink>
+                  </li>
+                  <li className="nav-item">
+                    <NavLink to="/login" className="nav-link">
+                      Đăng nhập
+                    </NavLink>
+                  </li>
+                </>
+              ) : (
+                <li className="nav-item">
+                  <NavLink
+                    onClick={handleLogout}
+                    to="/login"
+                    className="nav-link"
+                  >
+                    Đăng xuất
+                  </NavLink>
+                </li>
+              )}
+
               <li className="nav-item">
                 <NavLink to="/cart" className="nav-link">
                   Giỏ hàng (0)
