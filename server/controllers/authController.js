@@ -104,6 +104,7 @@ exports.loginController = async (req, res) => {
         phone: user.phone,
         address: user.address,
         _id: user._id,
+        role: user.role,
       },
       token,
     });

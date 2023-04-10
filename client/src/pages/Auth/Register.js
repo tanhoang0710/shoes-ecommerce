@@ -38,7 +38,7 @@ const Register = () => {
   };
 
   return (
-    <Layout title="Đăng kí - Ecommer App">
+    <Layout title="Đăng kí - Shoes App">
       <div className="form-container ">
         <form onSubmit={handleSubmit}>
           <h4 className="title">ĐĂNG KÍ</h4>
